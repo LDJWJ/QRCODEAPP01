@@ -59,14 +59,15 @@ def main():
                     border=border
                 )
                 
-                # Display QR Code
-                st.image(qr_img, caption='Generated QR Code', use_column_width='always')
-                
-                # Download button
+                # Convert PIL Image to bytes
                 buffered = io.BytesIO()
                 qr_img.save(buffered, format="PNG")
                 img_bytes = buffered.getvalue()
                 
+                # Display QR Code
+                st.image(img_bytes, caption='Generated QR Code', use_container_width=True)
+                
+                # Download button
                 st.download_button(
                     label="Download QR Code",
                     data=img_bytes,
